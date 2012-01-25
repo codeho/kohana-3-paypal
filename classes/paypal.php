@@ -138,11 +138,12 @@ abstract class PayPal {
 		// Create POST data
 		$post = array(
 			'METHOD'    => $method,
-			'VERSION'   => 51.0,
+			'VERSION'   => 85.0,
 			'USER'      => $this->_username,
 			'PWD'       => $this->_password,
 			'SIGNATURE' => $this->_signature,
 		) + $params;
+
 
 		// Create a new curl instance
 		$curl = curl_init();
@@ -150,6 +151,7 @@ abstract class PayPal {
 		// Set curl options
 		curl_setopt_array($curl, array(
 			CURLOPT_URL            => $this->api_url(),
+			CURLOPT_VERBOSE        => FALSE,
 			CURLOPT_POST           => TRUE,
 			CURLOPT_POSTFIELDS     => http_build_query($post, NULL, '&'),
 			CURLOPT_SSL_VERIFYPEER => FALSE,
